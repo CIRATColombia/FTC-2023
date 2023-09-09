@@ -1,1 +1,0 @@
-Acá empezar a modelar el robot 
