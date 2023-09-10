@@ -77,15 +77,15 @@ import java.util.concurrent.TimeUnit;
  *
  */
 
-@TeleOp(name="Drive tank", group = "Concept")
-
+@TeleOp(name="Tank Drive To AprilTag", group = "Concept")
+@Disabled
 public class RobotAutoDriveToAprilTagTank extends LinearOpMode
 {
     // Adjust these numbers to suit your robot.
     final double DESIRED_DISTANCE = 12.0; //  this is how close the camera should get to the target (inches)
 
     //  Set the GAIN constants to control the relationship between the measured position error, and how much power is
-    //  applied to the drive motors nnbto correct the error.
+    //  applied to the drive motors to correct the error.
     //  Drive = Error * Gain    Make these values smaller for smoother control, or larger for a more aggressive response.
     final double SPEED_GAIN =   0.02 ;   //  Speed Control "Gain". eg: Ramp up to 50% power at a 25 inch error.   (0.50 / 25.0)
     final double TURN_GAIN  =   0.01 ;   //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
@@ -105,8 +105,8 @@ public class RobotAutoDriveToAprilTagTank extends LinearOpMode
     @Override public void runOpMode()
     {
         boolean targetFound     = false;    // Set to true when an AprilTag target is detected
-        double  drive           = 0.2;        // Desired forward power/speed (-1 to +1) +ve is forward
-        double  turn            = 0.2;        // Desired turning power/speed (-1 to +1) +ve is CounterClockwise
+        double  drive           = 0;        // Desired forward power/speed (-1 to +1) +ve is forward
+        double  turn            = 0;        // Desired turning power/speed (-1 to +1) +ve is CounterClockwise
 
         // Initialize the Apriltag Detection process
         initAprilTag();
@@ -114,8 +114,8 @@ public class RobotAutoDriveToAprilTagTank extends LinearOpMode
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must match the names assigned during the robot configuration.
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "MD");
-        rightDrive = hardwareMap.get(DcMotor.class, "ML");
+        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
+        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
 
         // To drive forward, most robots need the motor on one side to be reversed because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
